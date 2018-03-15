@@ -20,14 +20,15 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Rule;
 import org.junit.rules.TemporaryFolder;
+import com.tpimaven.tpimantenimiento.Leer;
 
 /**
  *
  * @author degon
  */
-public class LectorTest {
+public class LeerTest {
     
-     @Rule
+    @Rule
     public TemporaryFolder dirPrueba = new TemporaryFolder();
 
     @Test
@@ -36,11 +37,12 @@ public class LectorTest {
         File tempFile = dirPrueba.newFile("prueba.csv");
         File tempFolder = dirPrueba.newFolder("Folder_prueba");
         
-        System.out.println(tempFile);
+        System.out.println(tempFile+"hola");
         System.out.println("Url Folder de prueba" + dirPrueba.getRoot().toString());
     }
+
     
-    public LectorTest() {
+    public LeerTest() {
     }
     
     @BeforeClass
@@ -59,15 +61,11 @@ public class LectorTest {
     public void tearDown() {
     }
 
-    /**
-     * Test of getInstance method, of class Lector.
-     */
-    
     @Test
     public void testLeerArchivo() {
         try {
             System.out.println("leerArchivo");
-            Lector instance = new Lector();
+            Leer instance = new Leer();
             File archivo1 = dirPrueba.newFile("Archivo1.csv");
             File archivo2 = dirPrueba.newFile("Archivo2.csv");     
             List<String> archivo = new ArrayList();
@@ -76,12 +74,32 @@ public class LectorTest {
             instance.leerArchivo(archivo);
             // TODO review the generated test code and remove the default call to fail.
         } catch (IOException ex) {
-            Logger.getLogger(LectorTest.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(LeerTest.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
- 
-        
+
+    /**
+     * Test of separador method, of class Lector.
+     */
+    
+    @Test
+    public void testSeparador() {
+        System.out.println("separador");
+        String linea = "";
+        Leer instance = new Leer();
+        String[] expResult = null;
+        String[] result = null;
+        assertArrayEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+
+    }
+       
+    /**
+     * Test of verificarPath method, of class Lector.
+     */
+    //https://junit.org/junit4/javadoc/4.12/org/junit/rules/TemporaryFolder.html 
+    //De aqui saque lo de temporary Folder
     @Rule
     public TemporaryFolder carpeta = new TemporaryFolder();
     
@@ -90,20 +108,32 @@ public class LectorTest {
         System.out.println("verificarPath");
         File archivoTemp = carpeta.newFile("arhivoTemp.cvs");
         String path = archivoTemp.getPath();
-        Lector instance = new Lector();
+        Leer instance = new Leer();
         boolean expResult = true;
         boolean result = instance.verificarArchivo(path);
         assertEquals(expResult, result);
     }
     
+    
+    /**
+     * Test of obtenerArchivos method, of class Lector.
+     */
+    
+    //Marca error de orden de devolucion de archivos
+    
     @Test
-    public void testVerificarPathDirectorio(){
-        System.out.println("Verificar Directorio");
+    public void testObtenerArchivos() throws IOException {
+        System.out.println("obtenerArchivos");
+        File archivo1 = carpeta.newFile("archivo1.csv");
+        File archivo2 = carpeta.newFile("archivo2.csv");
+        //File carpeta2 = carpeta.newFolder("recursos");
         String path = carpeta.getRoot().getPath();
-        Lector instance = new Lector();
-        boolean expResult = true;
-        boolean result = instance.verificarDirectorio(path);
+        Leer instance = new Leer();
+        //Bendito sea stackoverflow :v
+        List<File> expResult = new ArrayList<>();
+        expResult.add(archivo1);
+        expResult.add(archivo2);
+        List<String> result = instance.obtenerArchivos(path);
         assertEquals(expResult, result);
     }
-    
 }

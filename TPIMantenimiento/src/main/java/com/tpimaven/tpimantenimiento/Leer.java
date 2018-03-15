@@ -19,27 +19,22 @@ import java.util.stream.Stream;
  *
  * @author degon
  */
-public class Lector {
-    private static final Lector instancia = new Lector();
+public class Leer {
+    private static final Leer instancia = new Leer();
     
-    public static Lector getInstance(){
+    public static Leer getInstance(){
         return instancia;
     }
-
+     
+    
+    
+    //Esto ya no sera necesario si se ocupa el JFileChooser porque el ya valida si existe
      public boolean verificarArchivo(final String path){
         if(path != null && !path.trim().isEmpty()){
-            //Verifica que el path sea un archivo, tenga permisos de lectura y que no sea oculto
-            return (Paths.get(path).toFile().isFile() && Paths.get(path).toFile().canRead() && !Paths.get(path).toFile().isHidden());
+            //Verifica que el path sea un archivo y tenga permisos de lectura
+            return (Paths.get(path).toFile().isFile() && Paths.get(path).toFile().canRead());
         }
         
-        return false;
-    }
-    
-    public boolean verificarDirectorio(final String path){
-        if(path != null && !path.trim().isEmpty()){
-            //Verifica que el path sea un directorio, tenga permisos de lectura y que no sea oculto
-            return (Paths.get(path).toFile().isDirectory() && Paths.get(path).toFile().canRead() && !Paths.get(path).toFile().isHidden());
-        }
         return false;
     }
     
@@ -47,13 +42,13 @@ public class Lector {
         List<String> listaArchivos = new ArrayList<>();
         if(verificarArchivo(path)){
             listaArchivos.add(path);
-        }else if(verificarDirectorio(path)){
+        }else{
             try {           
             Files.walk(Paths.get(path)).filter(a -> a.toFile().getName().endsWith(".csv")).forEach(p -> listaArchivos.add(p.toString()));
             listaArchivos.forEach(System.out::println);
    
             } catch (IOException ex) {
-                Logger.getLogger(Lector.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Leer.class.getName()).log(Level.SEVERE, null, ex);
             }
         }      
         return listaArchivos;
@@ -66,7 +61,7 @@ public class Lector {
                 Stream<String> stream = Files.lines(Paths.get(l)).skip(1); //se obtiene el flujo de datos y se realiza un salto de linea
                 stream.forEach(a -> cadena.add(separador(a)));
             } catch (IOException ex) {
-                Logger.getLogger(Lector.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Leer.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
         cadena.forEach(a -> a.forEach(System.out::println));
@@ -74,7 +69,8 @@ public class Lector {
     
     public List<String> separador(String linea){
         String[] separado = linea.split(","); // separa la linea por comas
-        List<String> listaSeparado = new ArrayList<>(Arrays.asList(separado));  //se convierte a una lista 
+        List<String> listaSeparado = new ArrayList<>(Arrays.asList(separado));//se convierte a una lista 
+        System.out.println(listaSeparado);
         
         return listaSeparado; 
     }

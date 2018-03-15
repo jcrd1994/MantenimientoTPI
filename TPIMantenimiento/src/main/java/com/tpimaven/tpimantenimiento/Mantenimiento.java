@@ -12,16 +12,17 @@ package com.tpimaven.tpimantenimiento;
 public class Mantenimiento {
     private int id_mantenimiento;
     private int id_responsable;
-    private String historico; //No se a que se refiere exactamente con el historico
-                              //Pero lo pongo de todos modos 
     private String numero_inventario;
     private String numero_serie;
     private String marca;
     private String modelo;
-    private String OS;
+    private String sistema_operativo;
     private boolean licencia;
     private String version;
     private String observaciones;
+
+    public Mantenimiento() {
+    }
 
     public int getId_mantenimiento() {
         return id_mantenimiento;
@@ -37,14 +38,6 @@ public class Mantenimiento {
 
     public void setId_responsable(int id_responsable) {
         this.id_responsable = id_responsable;
-    }
-
-    public String getHistorico() {
-        return historico;
-    }
-
-    public void setHistorico(String historico) {
-        this.historico = historico;
     }
 
     public String getNumero_inventario() {
@@ -79,12 +72,12 @@ public class Mantenimiento {
         this.modelo = modelo;
     }
 
-    public String getOS() {
-        return OS;
+    public String getSistema_operativo() {
+        return sistema_operativo;
     }
 
-    public void setOS(String OS) {
-        this.OS = OS;
+    public void setSistema_operativo(String sistema_operativo) {
+        this.sistema_operativo = sistema_operativo;
     }
 
     public boolean isLicencia() {
@@ -111,20 +104,18 @@ public class Mantenimiento {
         this.observaciones = observaciones;
     }
 
-    public Mantenimiento(int id_mantenimiento, int id_responsable, String historico, String numero_inventario, String numero_serie, String marca, String modelo, String OS, boolean licencia, String version, String observaciones) {
+    public Mantenimiento(int id_mantenimiento, int id_responsable, String numero_inventario, String numero_serie, String marca, String modelo, String sistema_operativo, boolean licencia, String version, String observaciones) {
         this.id_mantenimiento = id_mantenimiento;
         this.id_responsable = id_responsable;
-        this.historico = historico;
         this.numero_inventario = numero_inventario;
         this.numero_serie = numero_serie;
         this.marca = marca;
         this.modelo = modelo;
-        this.OS = OS;
+        this.sistema_operativo = sistema_operativo;
         this.licencia = licencia;
         this.version = version;
         this.observaciones = observaciones;
     }
 
-    public Mantenimiento() {
-    }
+    
 }

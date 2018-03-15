@@ -10,7 +10,7 @@ package com.tpimaven.tpimantenimiento;
  * @author degon
  */
 public class Modelo {
-     private int id_modelo;
+    private int id_modelo;
     private String modelo;
 
     public int getId_modelo() {

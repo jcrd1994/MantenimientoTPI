@@ -14,7 +14,18 @@ public class Equipo {
     private String numero_inventario;
     private int id_modelo;
     private int id_marca;
-    private int OS;
+    private int sistema_operativo;
+
+    public Equipo() {
+    }
+
+    public Equipo(String numero_serie, String numero_inventario, int id_modelo, int id_marca, int sistema_operativo) {
+        this.numero_serie = numero_serie;
+        this.numero_inventario = numero_inventario;
+        this.id_modelo = id_modelo;
+        this.id_marca = id_marca;
+        this.sistema_operativo = sistema_operativo;
+    }
 
     public String getNumero_serie() {
         return numero_serie;
@@ -48,22 +59,13 @@ public class Equipo {
         this.id_marca = id_marca;
     }
 
-    public int getOS() {
-        return OS;
+    public int getSistema_operativo() {
+        return sistema_operativo;
     }
 
-    public void setOS(int OS) {
-        this.OS = OS;
+    public void setSistema_operativo(int sistema_operativo) {
+        this.sistema_operativo = sistema_operativo;
     }
 
-    public Equipo(String numero_serie, String numero_inventario, int id_modelo, int id_marca, int OS) {
-        this.numero_serie = numero_serie;
-        this.numero_inventario = numero_inventario;
-        this.id_modelo = id_modelo;
-        this.id_marca = id_marca;
-        this.OS = OS;
-    }
-
-    public Equipo() {
-    }
+    
 }
